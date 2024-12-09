@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración - Kioskeys</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+  <link rel="stylesheet" href="/src/admin/css/admin.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <a href="/"><img src="/logo.svg" alt="Kioskeys" data-logo></a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Inicio</a>
+      <a href="/admin" class="active">Panel Admin</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Panel de Administración</h1>
+        <p>Gestiona el contenido de tu sitio</p>
+      </div>
+    </section>
+
+    <div class="admin-container">
+      <nav class="admin-nav">
+        <a href="#brands" class="active" data-section="brands">Marcas</a>
+        <a href="#products" data-section="products">Productos</a>
+        <a href="#categories" data-section="categories">Categorías</a>
+        <a href="#settings" data-section="settings">Configuración</a>
+      </nav>
+
+      <section id="brands" class="admin-section">
+        <div class="section-title">
+          <h2>Gestión de Marcas</h2>
+        </div>
+        
+        <form id="brandForm">
+          <input type="hidden" name="id">
+          
+          <div class="form-group">
+            <label>Logo de la Marca</label>
+            <input type="hidden" role="uploadcare-uploader" data-images-only="true">
+            <input type="hidden" name="logo" id="brandLogo">
+            <img id="logoPreview" src="/placeholder-logo.png" class="preview-image">
+          </div>
+
+          <div class="form-group">
+            <label>Nombre de la Marca</label>
+            <input type="text" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label>Tipo</label>
+            <select name="type" required>
+              <option value="car">Automóvil</option>
+              <option value="motorcycle">Motocicleta</option>
+              <option value="commercial">Comercial</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Guardar Marca
+          </button>
+        </form>
+
+        <div id="brandsList" class="grid">
+          <!-- Brands will be rendered here -->
+        </div>
+      </section>
+
+      <section id="products" class="admin-section" style="display: none;">
+        <div class="section-title">
+          <h2>Gestión de Productos</h2>
+        </div>
+        <!-- Products content -->
+      </section>
+
+      <section id="categories" class="admin-section" style="display: none;">
+        <div class="section-title">
+          <h2>Gestión de Categorías</h2>
+        </div>
+        <!-- Categories content -->
+      </section>
+
+      <section id="settings" class="admin-section" style="display: none;">
+        <div class="section-title">
+          <h2>Configuración</h2>
+        </div>
+        <!-- Settings content -->
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    import { BrandsManager } from '/src/admin/js/managers/BrandsManager.js';
+    import { db } from '/src/admin/js/db.js';
+
+    // Initialize database and managers
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        await db.open();
+        window.brandsManager = new BrandsManager();
+
+        // Handle navigation
+        const navLinks = document.querySelectorAll('.admin-nav a');
+        const sections = document.querySelectorAll('.admin-section');
+
+        navLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Update active state
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+
+            // Show selected section
+            const sectionId = link.getAttribute('href').substring(1);
+            sections.forEach(section => {
+              section.style.display = section.id === sectionId ? 'block' : 'none';
+            });
+          });
+        });
+
+      } catch (error) {
+        console.error('Error initializing admin panel:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al inicializar el panel de administración'
+        });
+      }
+    });
+  </script>
+</body>
+</html>

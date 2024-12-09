@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editor de Productos - Kioskeys</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* ... Estilos anteriores ... */
+    .preview-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .preview-content {
+      background: white;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 24px;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .close-preview {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .preview-image {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin: 0 auto 20px;
+      display: block;
+    }
+
+    .preview-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .preview-info {
+      margin: 20px 0;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .preview-info h3 {
+      color: var(--primary-blue);
+      margin-bottom: 12px;
+    }
+
+    .preview-features {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0;
+    }
+
+    .preview-features li {
+      padding-left: 24px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .preview-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--primary-blue);
+    }
+  </style>
+</head>
+<body>
+  <!-- ... Contenido anterior hasta el script ... -->
+
+  <!-- Agregar el modal de vista previa -->
+  <div id="previewModal" class="preview-modal">
+    <div class="preview-content">
+      <div class="preview-header">
+        <h2>Vista Previa del Producto</h2>
+        <button class="close-preview" onclick="closePreview()">&times;</button>
+      </div>
+      <div id="previewContent"></div>
+      <div class="preview-buttons">
+        <button class="button button-danger" onclick="closePreview()">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+        <button class="button button-primary" onclick="confirmProduct()">
+          <i class="fas fa-check"></i> Confirmar y Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ... Scripts anteriores ...
+
+    let productToSave = null;
+
+    // Mostrar vista previa
+    function showPreview(product) {
+      const modal = document.getElementById('previewModal');
+      const content = document.getElementById('previewContent');
+      
+      content.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="preview-image" 
+             onerror="this.src='https://via.placeholder.com/200x200?text=Error+Imagen'">
+        
+        <div class="preview-info">
+          <h3>${product.name}</h3>
+          <p><strong>Categoría:</strong> ${product.category}</p>
+          <p><strong>Precio:</strong> $${product.price}</p>
+          <p><strong>Descripción:</strong></p>
+          <p>${product.description}</p>
+          
+          <h4>Características:</h4>
+          <ul class="preview-features">
+            ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+      
+      modal.style.display = 'block';
+      productToSave = product;
+    }
+
+    // Cerrar vista previa
+    function closePreview() {
+      document.getElementById('previewModal').style.display = 'none';
+      productToSave = null;
+    }
+
+    // Confirmar y guardar producto
+    function confirmProduct() {
+      if (!productToSave) return;
+
+      let products = JSON.parse(localStorage.getItem('kioskeys_products')) || [];
+
+      if (productToSave.id && products.some(p => p.id === productToSave.id)) {
+        // Actualizar producto existente
+        products = products.map(p => p.id === productToSave.id ? productToSave : p);
+        showSuccess('Producto actualizado correctamente');
+      } else {
+        // Agregar nuevo producto
+        products.push(productToSave);
+        showSuccess('Producto agregado correctamente');
+      }
+
+      localStorage.setItem('kioskeys_products', JSON.stringify(products));
+      
+      document.getElementById('productForm').reset();
+      document.getElementById('productId').value = '';
+      closePreview();
+      renderProducts();
+    }
+
+    // Modificar handleSubmit para mostrar vista previa
+    function handleSubmit(event) {
+      event.preventDefault();
+      
+      const features = Array.from(document.querySelectorAll('.feature-input input'))
+        .map(input => input.value.trim())
+        .filter(feature => feature);
+
+      const product = {
+        id: document.getElementById('productId').value || Date.now().toString(),
+        name: document.getElementById('productName').value,
+        category: document.getElementById('productCategory').value,
+        image: document.getElementById('productImage').value,
+        description: document.getElementById('productDescription').value,
+        features: features,
+        price: parseFloat(document.getElementById('productPrice').value)
+      };
+
+      showPreview(product);
+    }
+
+    // ... Resto del script anterior ...
+  </script>
+</body>
+</html>

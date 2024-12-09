@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planes - Kioskeys</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .plan-features {
+      list-style: none;
+      margin: 20px 0;
+      padding: 0;
+    }
+
+    .plan-features li {
+      margin: 12px 0;
+      padding-left: 24px;
+      position: relative;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
+    }
+
+    .plan-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 30px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-align: center;
+      width: 100%;
+      margin-top: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    .button:hover::before {
+      left: 100%;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .price {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 16px 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .price span {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+
+    .price small {
+      font-size: 14px;
+      opacity: 0.7;
+      font-weight: normal;
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.1) 0%, transparent 60%);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 59, 111, 0.2);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .plan-personal {
+      background: linear-gradient(135deg, #2193b0, #6dd5ed);
+    }
+
+    .plan-premium {
+      background: linear-gradient(135deg, #003B8E, #0072BC);
+      transform: scale(1.05);
+    }
+
+    .plan-empresa {
+      background: linear-gradient(135deg, #373B44, #4286f4);
+    }
+
+    .plan-personalizado {
+      background: linear-gradient(135deg, #4B79A1, #283E51);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 16px;
+      right: -32px;
+      background: #FFD700;
+      color: #000;
+      padding: 8px 40px;
+      transform: rotate(45deg);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1;
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.1);
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+    }
+
+    h3 {
+      color: white;
+      font-size: 24px;
+      margin: 16px 0;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .plan-description {
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .feature-card {
+        transform: scale(1) !important;
+        min-height: auto;
+      }
+    }
+
+    .payment-methods {
+      background: white;
+      border-radius: 18px;
+      padding: 32px;
+      margin: 32px 0;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 59, 142, 0.15);
+    }
+
+    .payment-methods h2 {
+      color: var(--primary-blue);
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .payment-option {
+      padding: 24px;
+      border-radius: 12px;
+      background: #f8f9fa;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .payment-option:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 59, 142, 0.1);
+    }
+
+    .payment-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      color: var(--primary-blue);
+      background: rgba(0, 59, 142, 0.1);
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+    }
+
+    .payment-name {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-color);
+    }
+
+    .payment-description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+
+    .features-comparison {
+      margin-top: 48px;
+      background: white;
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 8px 32px rgba(0, 59, 142, 0.15);
+    }
+
+    .features-comparison h2 {
+      text-align: center;
+      color: var(--primary-blue);
+      margin-bottom: 32px;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 16px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    .comparison-table th {
+      background: var(--primary-blue);
+      color: white;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+
+    .check-icon {
+      color: #28a745;
+    }
+
+    .times-icon {
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <a href="/"><img src="/logo.svg" alt="Kioskeys"></a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Inicio</a>
+      <a href="/pages/red-servicios.html">Red de Servicios</a>
+      <a href="/pages/planes.html">Planes</a>
+      <a href="/pages/productos.html">Productos</a>
+      <a href="/pages/contacto.html">Contacto</a>
+    </div>
+    <button class="menu-button">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Planes y Precios</h1>
+        <p>Encuentra el plan perfecto para ti</p>
+      </div>
+    </section>
+
+    <section class="main-content">
+      <div class="content-container">
+        <div class="features-grid">
+          <div class="feature-card plan-personal">
+            <div>
+              <i class="fas fa-user feature-icon"></i>
+              <h3>Plan Personal</h3>
+              <div class="price">
+                $2.500<span>/mes</span>
+                <small>+ IVA</small>
+              </div>
+              <p class="plan-description">Ideal para uso personal y familiar</p>
+              <ul class="plan-features">
+                <li>2 copias virtuales</li>
+                <li>Almacenamiento seguro</li>
+                <li>Soporte básico</li>
+                <li>App móvil</li>
+                <li>Respaldo en la nube</li>
+              </ul>
+            </div>
+            <a href="/registro" class="button">Comenzar Ahora</a>
+          </div>
+
+          <div class="feature-card plan-premium">
+            <div class="popular-badge">MÁS POPULAR</div>
+            <div>
+              <i class="fas fa-crown feature-icon"></i>
+              <h3>Plan Premium</h3>
+              <div class="price">
+                $4.500<span>/mes</span>
+                <small>+ IVA</small>
+              </div>
+              <p class="plan-description">Para usuarios que necesitan más funcionalidades</p>
+              <ul class="plan-features">
+                <li>5 copias virtuales</li>
+                <li>Almacenamiento seguro</li>
+                <li>Soporte prioritario 24/7</li>
+                <li>30% descuento en duplicados</li>
+                <li>Respaldo en la nube</li>
+                <li>Compartir accesos</li>
+                <li>Historial detallado</li>
+              </ul>
+            </div>
+            <a href="/registro" class="button">Elegir Premium</a>
+          </div>
+
+          <div class="feature-card plan-empresa">
+            <div>
+              <i class="fas fa-building feature-icon"></i>
+              <h3>Plan Empresa</h3>
+              <div class="price">
+                $9.900<span>/mes</span>
+                <small>+ IVA</small>
+              </div>
+              <p class="plan-description">Solución completa para empresas</p>
+              <ul class="plan-features">
+                <li>Copias ilimitadas</li>
+                <li>Soporte técnico dedicado</li>
+                <li>Panel de administración</li>
+                <li>API de integración</li>
+                <li>Usuarios ilimitados</li>
+                <li>Reportes avanzados</li>
+                <li>Personalización de marca</li>
+              </ul>
+            </div>
+            <a href="/contacto" class="button">Contactar Ventas</a>
+          </div>
+
+          <div class="feature-card plan-personalizado">
+            <div>
+              <i class="fas fa-handshake feature-icon"></i>
+              <h3>Plan Personalizado</h3>
+              <div class="price">Consultar</div>
+              <p class="plan-description">Adaptado a tus necesidades específicas</p>
+              <ul class="plan-features">
+                <li>Soluciones a medida</li>
+                <li>Integración personalizada</li>
+                <li>Soporte dedicado VIP</li>
+                <li>Características personalizadas</li>
+                <li>SLA garantizado</li>
+                <li>Implementación asistida</li>
+                <li>Capacitación del personal</li>
+              </ul>
+            </div>
+            <a href="/contacto" class="button">Solicitar Propuesta</a>
+          </div>
+        </div>
+
+        <div class="payment-methods" id="pagos">
+          <h2>Métodos de Pago Disponibles</h2>
+          <div class="payment-grid">
+            <div class="payment-option">
+              <i class="fas fa-credit-card payment-icon"></i>
+              <div class="payment-name">Tarjetas</div>
+              <div class="payment-description">Aceptamos todas las tarjetas de crédito y débito</div>
+            </div>
+
+            <div class="payment-option">
+              <i class="fab fa-paypal payment-icon"></i>
+              <div class="payment-name">PayPal</div>
+              <div class="payment-description">Pago seguro a través de PayPal</div>
+            </div>
+
+            <div class="payment-option">
+              <i class="fas fa-handshake payment-icon"></i>
+              <div class="payment-name">Mercado Pago</div>
+              <div class="payment-description">Pago fácil con Mercado Pago</div>
+            </div>
+
+            <div class="payment-option">
+              <i class="fas fa-university payment-icon"></i>
+              <div class="payment-name">Transferencia</div>
+              <div class="payment-description">Transferencia bancaria directa</div>
+            </div>
+          </div>
+          
+          <p style="color: #666; margin-top: 16px;">
+            Todos los pagos son procesados de forma segura y encriptada
+          </p>
+        </div>
+
+        <div class="features-comparison">
+          <h2>Comparación de Características</h2>
+          <div style="overflow-x: auto;">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Característica</th>
+                  <th>Personal</th>
+                  <th>Premium</th>
+                  <th>Empresa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Copias Virtuales</td>
+                  <td>2</td>
+                  <td>5</td>
+                  <td>Ilimitadas</td>
+                </tr>
+                <tr>
+                  <td>Soporte 24/7</td>
+                  <td><i class="fas fa-times times-icon"></i></td>
+                  <td><i class="fas fa-check check-icon"></i></td>
+                  <td><i class="fas fa-check check-icon"></i></td>
+                </tr>
+                <tr>
+                  <td>App Móvil</td>
+                  <td><i class="fas fa-check check-icon"></i></td>
+                  <td><i class="fas fa-check check-icon"></i></td>
+                  <td><i class="fas fa-check check-icon"></i></td>
+                </tr>
+                <tr>
+                  <td>Descuentos en Duplicados</td>
+                  <td>10%</td>
+                  <td>30%</td>
+                  <td>40%</td>
+                </tr>
+                <tr>
+                  <td>Panel de Administración</td>
+                  <td><i class="fas fa-times times-icon"></i></td>
+                  <td><i class="fas fa-times times-icon"></i></td>
+                  <td><i class="fas fa-check check-icon"></i></td>
+                </tr>
+                <tr>
+                  <td>API de Integración</td>
+                  <td><i class="fas fa-times times-icon"></i></td>
+                  <td><i class="fas fa-times times-icon"></i></td>
+                  <td><i class="fas fa-check check-icon"></i></td>
+                </tr>
+                <tr>
+                  <td>Usuarios</td>
+                  <td>1</td>
+                  <td>3</td>
+                  <td>Ilimitados</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/main.js"></script>
+</body>
+</html>

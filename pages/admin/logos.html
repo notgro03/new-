@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrar Logos - Kioskeys</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .admin-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-editor {
+      display: grid;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .brand-form {
+      display: grid;
+      gap: 16px;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 12px;
+      border: 2px solid rgba(0,0,0,0.1);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+    }
+
+    .preview-logo {
+      width: 120px;
+      height: 80px;
+      object-fit: contain;
+      margin: 12px 0;
+      border: 2px solid rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px;
+    }
+
+    .brands-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+    }
+
+    .brands-table th,
+    .brands-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .brands-table th {
+      background: var(--primary-blue);
+      color: white;
+    }
+
+    .brands-table tr:hover {
+      background: rgba(0,0,0,0.02);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary-blue);
+      color: white;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .models-input {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .logo-preview-container {
+      text-align: center;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+
+    .success-message {
+      padding: 12px;
+      background: #d4edda;
+      color: #155724;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .error-message {
+      padding: 12px;
+      background: #f8d7da;
+      color: #721c24;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <a href="/"><img src="/logo.svg" alt="Kioskeys"></a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Inicio</a>
+      <a href="/pages/admin/logos.html" class="active">Admin Logos</a>
+      <a href="/pages/admin/dashboard.html">Dashboard</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Administrar Logos</h1>
+        <p>Gestiona los logos y marcas de telemandos</p>
+      </div>
+    </section>
+
+    <section class="main-content">
+      <div class="content-container">
+        <div class="admin-container">
+          <div id="successMessage" class="success-message"></div>
+          <div id="errorMessage" class="error-message"></div>
+
+          <div class="brand-form">
+            <h3>Agregar/Editar Marca</h3>
+            <form id="brandForm" onsubmit="handleSubmit(event)">
+              <input type="hidden" id="brandId">
+              
+              <div class="form-group">
+                <label for="brandName">Nombre de la Marca</label>
+                <input type="text" id="brandName" required>
+              </div>
+
+              <div class="form-group">
+                <label for="brandType">Tipo</label>
+                <select id="brandType" required>
+                  <option value="car">Auto</option>
+                  <option value="motorcycle">Moto</option>
+                  <option value="commercial">Comercial</option>
+                  <option value="luxury">Lujo</option>
+                  <option value="electric">Eléctrico</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="logoUrl">URL del Logo</label>
+                <input type="url" id="logoUrl" required>
+              </div>
+
+              <div class="logo-preview-container">
+                <img id="logoPreview" class="preview-logo" src="" alt="Preview">
+              </div>
+
+              <div class="form-group">
+                <label for="brandModels">Modelos (uno por línea)</label>
+                <textarea id="brandModels" class="models-input" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Guardar Marca</button>
+            </form>
+          </div>
+
+          <div class="brands-list">
+            <h3>Marcas Existentes</h3>
+            <table class="brands-table">
+              <thead>
+                <tr>
+                  <th>Logo</th>
+                  <th>Nombre</th>
+                  <th>Tipo</th>
+                  <th>Modelos</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="brandsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Cargar datos del localStorage o usar array vacío si no hay datos
+    let brands = JSON.parse(localStorage.getItem('kioskeys_brands')) || [];
+
+    // Mostrar mensajes
+    function showMessage(message, isError = false) {
+      const successMsg = document.getElementById('successMessage');
+      const errorMsg = document.getElementById('errorMessage');
+      
+      if (isError) {
+        errorMsg.textContent = message;
+        errorMsg.style.display = 'block';
+        setTimeout(() => errorMsg.style.display = 'none', 3000);
+      } else {
+        successMsg.textContent = message;
+        successMsg.style.display = 'block';
+        setTimeout(() => successMsg.style.display = 'none', 3000);
+      }
+    }
+
+    // Preview del logo
+    document.getElementById('logoUrl').addEventListener('input', function(e) {
+      const preview = document.getElementById('logoPreview');
+      preview.src = e.target.value;
+      preview.onerror = function() {
+        preview.src = 'https://via.placeholder.com/120x80?text=Logo+Error';
+      };
+    });
+
+    // Manejar envío del formulario
+    function handleSubmit(event) {
+      event.preventDefault();
+      
+      const brandId = document.getElementById('brandId').value;
+      const brand = {
+        name: document.getElementById('brandName').value,
+        type: document.getElementById('brandType').value,
+        logo: document.getElementById('logoUrl').value,
+        models: document.getElementById('brandModels').value.split('\n').filter(model => model.trim())
+      };
+
+      if (brandId) {
+        // Actualizar marca existente
+        const index = brands.findIndex(b => b.name === brandId);
+        if (index !== -1) {
+          brands[index] = brand;
+          showMessage('Marca actualizada correctamente');
+        }
+      } else {
+        // Agregar nueva marca
+        brands.push(brand);
+        showMessage('Marca agregada correctamente');
+      }
+
+      // Guardar en localStorage
+      localStorage.setItem('kioskeys_brands', JSON.stringify(brands));
+      
+      // Actualizar tabla y limpiar formulario
+      renderBrandsTable();
+      document.getElementById('brandForm').reset();
+      document.getElementById('brandId').value = '';
+      document.getElementById('logoPreview').src = '';
+    }
+
+    // Editar marca
+    function editBrand(name) {
+      const brand = brands.find(b => b.name === name);
+      if (brand) {
+        document.getElementById('brandId').value = brand.name;
+        document.getElementById('brandName').value = brand.name;
+        document.getElementById('brandType').value = brand.type;
+        document.getElementById('logoUrl').value = brand.logo;
+        document.getElementById('logoPreview').src = brand.logo;
+        document.getElementById('brandModels').value = brand.models.join('\n');
+      }
+    }
+
+    // Eliminar marca
+    function deleteBrand(name) {
+      if (confirm('¿Estás seguro de que quieres eliminar esta marca?')) {
+        brands = brands.filter(b => b.name !== name);
+        localStorage.setItem('kioskeys_brands', JSON.stringify(brands));
+        renderBrandsTable();
+        showMessage('Marca eliminada correctamente');
+      }
+    }
+
+    // Renderizar tabla de marcas
+    function renderBrandsTable() {
+      const tbody = document.getElementById('brandsTableBody');
+      tbody.innerHTML = '';
+
+      brands.forEach(brand => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><img src="${brand.logo}" alt="${brand.name}" class="preview-logo"></td>
+          <td>${brand.name}</td>
+          <td>${brand.type}</td>
+          <td>${brand.models.slice(0, 3).join(', ')}${brand.models.length > 3 ? '...' : ''}</td>
+          <td class="action-buttons">
+            <button onclick="editBrand('${brand.name}')" class="btn btn-primary">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button onclick="deleteBrand('${brand.name}')" class="btn btn-danger">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Inicializar tabla
+    renderBrandsTable();
+  </script>
+</body>
+</html>

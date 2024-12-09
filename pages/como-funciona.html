@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Cómo Funciona? - Kioskeys</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .step-card {
+      background: var(--card-gradient);
+      border-radius: 18px;
+      padding: 32px;
+      color: white;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .step-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step-number {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .benefit-card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 4px 6px rgba(0, 59, 142, 0.1);
+      border: 1px solid rgba(0, 59, 142, 0.1);
+    }
+
+    .benefit-icon {
+      font-size: 32px;
+      color: var(--primary-blue);
+      margin-bottom: 16px;
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .features-list li {
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .features-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .info-section {
+      background: white;
+      border-radius: 18px;
+      padding: 32px;
+      margin: 32px 0;
+      box-shadow: 0 4px 6px rgba(0, 59, 142, 0.1);
+    }
+
+    .info-section h2 {
+      color: var(--primary-blue);
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    .info-section p {
+      margin-bottom: 16px;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .app-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .app-feature {
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .app-feature i {
+      font-size: 32px;
+      color: var(--primary-blue);
+      margin-bottom: 16px;
+    }
+
+    .app-feature h3 {
+      margin-bottom: 12px;
+      color: var(--primary-blue);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <a href="/"><img src="/logo.svg" alt="Kioskeys"></a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Inicio</a>
+      <a href="/pages/red-servicios.html">Red de Servicios</a>
+      <a href="/pages/planes.html">Planes</a>
+      <a href="/pages/productos.html">Productos</a>
+      <a href="/pages/contacto.html">Contacto</a>
+    </div>
+    <button class="menu-button">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>¿Cómo Funciona Kioskeys?</h1>
+        <p>Tu sistema integral de gestión de llaves</p>
+      </div>
+    </section>
+
+    <section class="main-content">
+      <div class="content-container">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <h3>Registra tus llaves</h3>
+          <p>Crea tu cuenta y digitaliza tus llaves en nuestro sistema seguro. Cada llave recibe un código único y es almacenada con la más alta seguridad.</p>
+          <ul class="features-list">
+            <li>Escaneo digital de alta precisión</li>
+            <li>Asignación de códigos únicos encriptados</li>
+            <li>Clasificación por categorías y etiquetas</li>
+            <li>Fotos y descripción detallada</li>
+          </ul>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <h3>Gestiona tus accesos</h3>
+          <p>Organiza tus llaves por grupos, comparte accesos de forma segura y mantén un registro detallado de cada uso.</p>
+          <ul class="features-list">
+            <li>Control de acceso granular</li>
+            <li>Historial de uso en tiempo real</li>
+            <li>Notificaciones de seguridad</li>
+            <li>Compartir acceso temporal o permanente</li>
+          </ul>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <h3>Duplica cuando necesites</h3>
+          <p>Solicita duplicados en cualquier punto de nuestra red de servicios. Solo necesitas tu código único y una identificación válida.</p>
+          <ul class="features-list">
+            <li>Red de cerrajeros certificados</li>
+            <li>Verificación de identidad segura</li>
+            <li>Duplicados precisos garantizados</li>
+            <li>Seguimiento del estado en tiempo real</li>
+          </ul>
+        </div>
+
+        <div class="info-section">
+          <h2>Tecnología de Vanguardia</h2>
+          <p>Kioskeys utiliza tecnología de última generación para garantizar la máxima precisión y seguridad en la gestión de tus llaves:</p>
+          
+          <div class="app-features">
+            <div class="app-feature">
+              <i class="fas fa-fingerprint"></i>
+              <h3>Biometría</h3>
+              <p>Autenticación segura mediante huella digital o reconocimiento facial</p>
+            </div>
+            
+            <div class="app-feature">
+              <i class="fas fa-lock"></i>
+              <h3>Encriptación</h3>
+              <p>Datos protegidos con encriptación de grado militar AES-256</p>
+            </div>
+            
+            <div class="app-feature">
+              <i class="fas fa-cloud"></i>
+              <h3>Respaldo Cloud</h3>
+              <p>Sincronización automática y respaldo en la nube</p>
+            </div>
+            
+            <div class="app-feature">
+              <i class="fas fa-qrcode"></i>
+              <h3>Códigos QR</h3>
+              <p>Acceso rápido mediante códigos QR únicos</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <i class="fas fa-shield-alt benefit-icon"></i>
+            <h3>Máxima Seguridad</h3>
+            <p>Encriptación de nivel militar y autenticación de dos factores para proteger tus llaves digitales. Sistema de permisos avanzado y auditoría completa.</p>
+          </div>
+
+          <div class="benefit-card">
+            <i class="fas fa-clock benefit-icon"></i>
+            <h3>Disponibilidad 24/7</h3>
+            <p>Accede a tus llaves digitales y solicita servicios en cualquier momento, desde cualquier lugar. Soporte técnico disponible las 24 horas.</p>
+          </div>
+
+          <div class="benefit-card">
+            <i class="fas fa-history benefit-icon"></i>
+            <h3>Historial Completo</h3>
+            <p>Registro detallado de todas las operaciones realizadas con tus llaves. Reportes personalizados y análisis de uso.</p>
+          </div>
+
+          <div class="benefit-card">
+            <i class="fas fa-sync benefit-icon"></i>
+            <h3>Sincronización Total</h3>
+            <p>Mantén tus llaves sincronizadas en todos tus dispositivos. Cambios reflejados en tiempo real y notificaciones instantáneas.</p>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h2>App Móvil Intuitiva</h2>
+          <p>Nuestra aplicación móvil te permite gestionar tus llaves desde cualquier lugar:</p>
+          
+          <div class="app-features">
+            <div class="app-feature">
+              <i class="fas fa-mobile-alt"></i>
+              <h3>Interfaz Intuitiva</h3>
+              <p>Diseño moderno y fácil de usar</p>
+            </div>
+            
+            <div class="app-feature">
+              <i class="fas fa-bell"></i>
+              <h3>Notificaciones</h3>
+              <p>Alertas en tiempo real de actividad</p>
+            </div>
+            
+            <div class="app-feature">
+              <i class="fas fa-map-marked-alt"></i>
+              <h3>Localización</h3>
+              <p>Encuentra cerrajeros cercanos</p>
+            </div>
+            
+            <div class="app-feature">
+              <i class="fas fa-camera"></i>
+              <h3>Escaneo</h3>
+              <p>Digitaliza llaves con la cámara</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="/pages/planes.html" class="tutorial-button">
+          <i class="fas fa-rocket"></i>
+          Comenzar Ahora
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/main.js"></script>
+</body>
+</html>

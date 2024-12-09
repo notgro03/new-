@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carcasas para Mandos - Kioskeys</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .product-section {
+      margin: 32px 0;
+    }
+
+    .section-title {
+      color: var(--primary-blue);
+      font-size: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 59, 142, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 59, 142, 0.2);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-content {
+      padding: 24px;
+    }
+
+    .product-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary-blue);
+      margin-bottom: 12px;
+    }
+
+    .product-description {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .product-features {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .product-features li {
+      padding-left: 24px;
+      position: relative;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .product-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--primary-blue);
+    }
+
+    .product-footer {
+      padding: 16px 24px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product-price {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary-blue);
+    }
+
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--card-gradient);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 59, 142, 0.2);
+    }
+
+    .brands-section {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      margin: 32px 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 59, 142, 0.1);
+    }
+
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+      align-items: center;
+    }
+
+    .brand-logo {
+      max-width: 100px;
+      height: auto;
+      margin: 0 auto;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .brand-logo:hover {
+      opacity: 1;
+    }
+
+    .compatibility-note {
+      text-align: center;
+      color: #666;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .vehicle-types {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .vehicle-type {
+      background: var(--card-gradient);
+      color: white;
+      padding: 24px;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .vehicle-type:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 59, 142, 0.2);
+    }
+
+    .vehicle-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .vehicle-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .vehicle-description {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <a href="/"><img src="/logo.svg" alt="Kioskeys"></a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Inicio</a>
+      <a href="/pages/red-servicios.html">Red de Servicios</a>
+      <a href="/pages/planes.html">Planes</a>
+      <a href="/pages/productos.html">Productos</a>
+      <a href="/pages/contacto.html">Contacto</a>
+    </div>
+    <button class="menu-button">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Carcasas para Mandos</h1>
+        <p>Repuestos originales y alternativos para vehículos</p>
+      </div>
+    </section>
+
+    <section class="main-content">
+      <div class="content-container">
+        <div class="vehicle-types">
+          <div class="vehicle-type">
+            <i class="fas fa-car vehicle-icon"></i>
+            <h3 class="vehicle-title">Automóviles</h3>
+            <p class="vehicle-description">Carcasas para todo tipo de autos</p>
+          </div>
+
+          <div class="vehicle-type">
+            <i class="fas fa-motorcycle vehicle-icon"></i>
+            <h3 class="vehicle-title">Motos</h3>
+            <p class="vehicle-description">Carcasas para llaves de motos</p>
+          </div>
+
+          <div class="vehicle-type">
+            <i class="fas fa-truck vehicle-icon"></i>
+            <h3 class="vehicle-title">Camiones</h3>
+            <p class="vehicle-description">Carcasas para vehículos pesados</p>
+          </div>
+        </div>
+
+        <div class="product-section">
+          <h2 class="section-title">Nuestras Carcasas</h2>
+          <div class="product-grid">
+            <div class="product-card">
+              <img src="https://via.placeholder.com/400x200?text=Original+Auto" alt="Carcasa Original Auto" class="product-image">
+              <div class="product-content">
+                <h3 class="product-title">Carcasas Originales para Autos</h3>
+                <p class="product-description">Carcasas originales de fábrica para todas las marcas de automóviles.</p>
+                <ul class="product-features">
+                  <li>Material original certificado</li>
+                  <li>Ajuste perfecto garantizado</li>
+                  <li>Electrónica compatible</li>
+                  <li>Garantía de fábrica</li>
+                </ul>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">Desde $2.800</div>
+                <a href="/pages/contacto.html" class="contact-button">
+                  <i class="fas fa-envelope"></i>
+                  Consultar
+                </a>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="https://via.placeholder.com/400x200?text=Moto" alt="Carcasa Moto" class="product-image">
+              <div class="product-content">
+                <h3 class="product-title">Carcasas para Motos</h3>
+                <p class="product-description">Carcasas específicas para llaves y mandos de motocicletas.</p>
+                <ul class="product-features">
+                  <li>Compatibles con principales marcas</li>
+                  <li>Resistentes al agua</li>
+                  <li>Diseño ergonómico</li>
+                  <li>Fácil instalación</li>
+                </ul>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">Desde $1.900</div>
+                <a href="/pages/contacto.html" class="contact-button">
+                  <i class="fas fa-envelope"></i>
+                  Consultar
+                </a>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="https://via.placeholder.com/400x200?text=Camión" alt="Carcasa Camión" class="product-image">
+              <div class="product-content">
+                <h3 class="product-title">Carcasas para Camiones</h3>
+                <p class="product-description">Carcasas reforzadas para vehículos comerciales y de carga.</p>
+                <ul class="product-features">
+                  <li>Material extra resistente</li>
+                  <li>Diseño industrial</li>
+                  <li>Protección contra golpes</li>
+                  <li>Compatibilidad garantizada</li>
+                </ul>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">Desde $3.500</div>
+                <a href="/pages/contacto.html" class="contact-button">
+                  <i class="fas fa-envelope"></i>
+                  Consultar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="brands-section">
+          <h2 class="section-title">Marcas Compatibles</h2>
+          <div class="brands-grid">
+            <img src="https://via.placeholder.com/100x60?text=Toyota" alt="Toyota" class="brand-logo">
+            <img src="https://via.placeholder.com/100x60?text=VW" alt="Volkswagen" class="brand-logo">
+            <img src="https://via.placeholder.com/100x60?text=Honda" alt="Honda" class="brand-logo">
+            <img src="https://via.placeholder.com/100x60?text=Yamaha" alt="Yamaha" class="brand-logo">
+            <img src="https://via.placeholder.com/100x60?text=Scania" alt="Scania" class="brand-logo">
+            <img src="https://via.placeholder.com/100x60?text=Mercedes" alt="Mercedes" class="brand-logo">
+          </div>
+          <p class="compatibility-note">* Disponemos de carcasas para todas las marcas del mercado automotor</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/main.js"></script>
+</body>
+</html>

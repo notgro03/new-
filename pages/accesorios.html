@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accesorios - Kioskeys</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .product-card {
+      background: var(--card-gradient);
+      border-radius: 12px;
+      padding: 24px;
+      color: white;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 59, 142, 0.2);
+    }
+
+    .product-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin: 0 auto 16px;
+      background: white;
+      padding: 8px;
+    }
+
+    .product-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .product-description {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .product-features {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+      text-align: left;
+    }
+
+    .product-features li {
+      padding-left: 24px;
+      position: relative;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .product-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .product-price {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 16px 0;
+    }
+
+    .contact-button {
+      display: inline-block;
+      padding: 8px 24px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .contact-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <a href="/"><img src="/logo.svg" alt="Kioskeys"></a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Inicio</a>
+      <a href="/pages/red-servicios.html">Red de Servicios</a>
+      <a href="/pages/planes.html">Planes</a>
+      <a href="/pages/productos.html">Productos</a>
+      <a href="/pages/contacto.html">Contacto</a>
+    </div>
+    <button class="menu-button">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Accesorios</h1>
+        <p>Complementos y accesorios para tus llaves y mandos</p>
+      </div>
+    </section>
+
+    <section class="main-content">
+      <div class="content-container">
+        <div class="product-grid">
+          <div class="product-card">
+            <img src="https://via.placeholder.com/120x120?text=Fundas" alt="Fundas Protectoras" class="product-image">
+            <h3 class="product-title">Fundas Protectoras</h3>
+            <p class="product-description">Protege tus llaves y mandos con nuestras fundas premium</p>
+            <ul class="product-features">
+              <li>Silicona de alta calidad</li>
+              <li>Diseños exclusivos</li>
+              <li>Protección total</li>
+              <li>Varios colores disponibles</li>
+            </ul>
+            <div class="product-price">Desde $890</div>
+            <a href="/pages/contacto.html" class="contact-button">Consultar</a>
+          </div>
+
+          <div class="product-card">
+            <img src="https://via.placeholder.com/120x120?text=Baterías" alt="Baterías" class="product-image">
+            <h3 class="product-title">Baterías Certificadas</h3>
+            <p class="product-description">Baterías de larga duración para todos los modelos</p>
+            <ul class="product-features">
+              <li>Máxima duración</li>
+              <li>100% originales</li>
+              <li>Garantía incluida</li>
+              <li>Instalación gratuita</li>
+            </ul>
+            <div class="product-price">Desde $450</div>
+            <a href="/pages/contacto.html" class="contact-button">Consultar</a>
+          </div>
+
+          <div class="product-card">
+            <img src="https://via.placeholder.com/120x120?text=Llaveros" alt="Llaveros" class="product-image">
+            <h3 class="product-title">Llaveros de Seguridad</h3>
+            <p class="product-description">Llaveros con sistema de seguridad integrado</p>
+            <ul class="product-features">
+              <li>Sistema anti-pérdida</li>
+              <li>Material resistente</li>
+              <li>Diseño elegante</li>
+              <li>Personalizable</li>
+            </ul>
+            <div class="product-price">Desde $1.200</div>
+            <a href="/pages/contacto.html" class="contact-button">Consultar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/main.js"></script>
+</body>
+</html>

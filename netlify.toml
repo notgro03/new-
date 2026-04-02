@@ -1,18 +1,97 @@
 [build]
   publish = "dist"
-  command = "npm run build"
+  command = "npm ci && npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--no-audit --no-fund"
+
+[context.production]
+  command = "npm ci && npm run build"
+
+[context.deploy-preview]
+  command = "npm ci && npm run build"
+
+[context.branch-deploy]
+  command = "npm ci && npm run build"
 
 [[redirects]]
   from = "/admin"
-  to = "/pages/admin/kioskeys-admin-x7k9y2"
+  to = "/pages/admin/kioskeys-admin-x7k9y2.html"
+  status = 200
+
+[[redirects]]
+  from = "/como-funciona"
+  to = "/pages/como-funciona.html"
+  status = 200
+
+[[redirects]]
+  from = "/red-servicios"
+  to = "/pages/red-servicios.html"
+  status = 200
+
+[[redirects]]
+  from = "/planes"
+  to = "/pages/planes.html"
+  status = 200
+
+[[redirects]]
+  from = "/productos"
+  to = "/pages/productos.html"
+  status = 200
+
+[[redirects]]
+  from = "/contacto"
+  to = "/pages/contacto.html"
+  status = 200
+
+[[redirects]]
+  from = "/tutoriales"
+  to = "/pages/tutoriales.html"
+  status = 200
+
+[[redirects]]
+  from = "/telemandos"
+  to = "/pages/telemandos.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/pages/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq"
+  to = "/pages/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacidad"
+  to = "/pages/privacidad.html"
+  status = 200
+
+[[redirects]]
+  from = "/terminos"
+  to = "/pages/terminos.html"
+  status = 200
+
+[[redirects]]
+  from = "/llaves"
+  to = "/pages/llaves.html"
+  status = 200
+
+[[redirects]]
+  from = "/carcasas"
+  to = "/pages/carcasas.html"
+  status = 200
+
+[[redirects]]
+  from = "/accesorios"
+  to = "/pages/accesorios.html"
   status = 200
 
 [[redirects]]
   from = "/*.html"
   to = "/:splat"
   status = 301
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  force = true
